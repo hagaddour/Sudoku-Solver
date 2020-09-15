@@ -4,17 +4,13 @@
 
 SudokuSolver::SudokuSolver(std::vector<std::vector<int>> board): board(board)
     {
-       rows.reserve(9);
-       columns.reserve(9);
-       square.reserve(81);
-       std::set<int> temp;
-    for (int i = 0; i < 9; ++i) {
+        // initialzing the row, col, square with set of numbers
+        std::set<int> temp;
+        for (int i = 0; i < 9; ++i) {
             rows.emplace_back(temp);
             columns.emplace_back(temp);
-        for (int j = 0; j < 9; j++) {
             square.emplace_back(temp);
         }
-    }
        for (int i = 0; i < 9; ++i) {
         for (int j = 0; j < 9; j++) {
             if (board[i][j] == 0) continue;
@@ -24,9 +20,11 @@ SudokuSolver::SudokuSolver(std::vector<std::vector<int>> board): board(board)
             square[sq].insert(board[i][j]);
         }
        }
-
     }
- 
+
+
+ // main method that solves the sudoku problem through
+ // the use of back tracking 
     bool SudokuSolver::solveSudoku(int y, int x)
     {
         if (y == 9) {return true;}
@@ -50,6 +48,7 @@ SudokuSolver::SudokuSolver(std::vector<std::vector<int>> board): board(board)
         return false;
     }
  
+ // Prints the board to std out
     void SudokuSolver::getBoard() {
         for (int i = 0; i < 9; ++i) {
             for (int j = 0; j < 9; ++j) {
